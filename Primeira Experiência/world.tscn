@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1gcu11ypo1c3"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_tednu"]
+[ext_resource type="PackedScene" uid="uid://dcxmuoy3wa2o5" path="res://objects/box_regular.tscn" id="1_xwui4"]
+[ext_resource type="PackedScene" uid="uid://dbl3f65yb3oob" path="res://objects/box_bouncy.tscn" id="2_o8mhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06jir"]
+size = Vector2(1152, 64)
+
+[node name="World" type="Node2D"]
+
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("1_tednu")
+object_templates = Array[PackedScene]([ExtResource("1_xwui4"), ExtResource("2_o8mhd")])
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.216215, 0.829318, 0.943324, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(576, 617)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_06jir")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -576.0
+offset_top = -31.0
+offset_right = 576.0
+offset_bottom = 31.0
+
+[node name="Box Regular" parent="." instance=ExtResource("1_xwui4")]
+position = Vector2(159, 353)
+
+[node name="Box Regular2" parent="." instance=ExtResource("1_xwui4")]
+position = Vector2(376, 170)
+
+[node name="Box Regular3" parent="." instance=ExtResource("1_xwui4")]
+position = Vector2(491, 332)
+
+[node name="Box Regular4" parent="." instance=ExtResource("1_xwui4")]
+position = Vector2(531, 200)
+
+[node name="Box Regular5" parent="." instance=ExtResource("1_xwui4")]
+position = Vector2(209, 238)
+
+[node name="Box Regular6" parent="." instance=ExtResource("2_o8mhd")]
+position = Vector2(625, 494)
+
+[node name="Box Regular7" parent="." instance=ExtResource("2_o8mhd")]
+position = Vector2(314, 42)
