@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://crwwhitjqowsj"]
+
+[ext_resource type="Texture2D" uid="uid://trjpb7dgaxa2" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_mn5c6"]
+[ext_resource type="PackedScene" uid="uid://dnbxf4g60n406" path="res://player/player.tscn" id="2_jr3bw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1viwb"]
+line_spacing = 32.0
+
+[node name="TestPlayer" type="Node2D"]
+
+[node name="WarriorRed" type="Sprite2D" parent="."]
+position = Vector2(2540, 766)
+texture = ExtResource("1_mn5c6")
+
+[node name="Label" type="Label" parent="WarriorRed"]
+offset_left = 611.0
+offset_top = -694.0
+offset_right = 644.0
+offset_bottom = -671.0
+scale = Vector2(2.5286, 2.5286)
+text = "idle"
+
+[node name="Label9" type="Label" parent="WarriorRed"]
+offset_left = -505.0
+offset_top = -806.0
+offset_right = -472.0
+offset_bottom = -783.0
+scale = Vector2(3.43394, 3.43394)
+text = "0            1           2           3           4           5"
+
+[node name="Label10" type="Label" parent="WarriorRed"]
+offset_left = -600.0
+offset_top = -702.0
+offset_right = -585.0
+offset_bottom = -294.0
+scale = Vector2(3.43394, 3.43394)
+text = "0 1 2 3 4 5 6 7"
+label_settings = SubResource("LabelSettings_1viwb")
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="WarriorRed"]
+offset_left = 601.0
+offset_top = -506.0
+offset_right = 634.0
+offset_bottom = -483.0
+scale = Vector2(2.5286, 2.5286)
+text = "run"
+
+[node name="Label3" type="Label" parent="WarriorRed"]
+offset_left = 611.0
+offset_top = -297.0
+offset_right = 644.0
+offset_bottom = -274.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackSide1"
+
+[node name="Label4" type="Label" parent="WarriorRed"]
+offset_left = 611.0
+offset_top = -119.0
+offset_right = 644.0
+offset_bottom = -96.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackSide2"
+
+[node name="Label5" type="Label" parent="WarriorRed"]
+offset_left = 598.0
+offset_top = 83.0
+offset_right = 631.0
+offset_bottom = 106.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackDown1"
+
+[node name="Label6" type="Label" parent="WarriorRed"]
+offset_left = 612.0
+offset_top = 274.0
+offset_right = 645.0
+offset_bottom = 297.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackDown2"
+
+[node name="Label7" type="Label" parent="WarriorRed"]
+offset_left = 601.0
+offset_top = 459.0
+offset_right = 634.0
+offset_bottom = 482.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackUp1"
+
+[node name="Label8" type="Label" parent="WarriorRed"]
+offset_left = 609.0
+offset_top = 641.0
+offset_right = 642.0
+offset_bottom = 664.0
+scale = Vector2(2.5286, 2.5286)
+text = "attackUp2"
+
+[node name="Player" parent="." instance=ExtResource("2_jr3bw")]
+position = Vector2(542, 228)
+speed = 5.0
