@@ -19,6 +19,7 @@ offset_right = 644.0
 offset_bottom = -671.0
 scale = Vector2(2.5286, 2.5286)
 text = "idle"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label9" type="Label" parent="WarriorRed"]
 offset_left = -505.0
@@ -27,6 +28,7 @@ offset_right = -472.0
 offset_bottom = -783.0
 scale = Vector2(3.43394, 3.43394)
 text = "0            1           2           3           4           5"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label10" type="Label" parent="WarriorRed"]
 offset_left = -600.0
@@ -37,6 +39,7 @@ scale = Vector2(3.43394, 3.43394)
 text = "0 1 2 3 4 5 6 7"
 label_settings = SubResource("LabelSettings_1viwb")
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="WarriorRed"]
 offset_left = 601.0
@@ -45,6 +48,7 @@ offset_right = 634.0
 offset_bottom = -483.0
 scale = Vector2(2.5286, 2.5286)
 text = "run"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="WarriorRed"]
 offset_left = 611.0
@@ -53,6 +57,7 @@ offset_right = 644.0
 offset_bottom = -274.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackSide1"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="WarriorRed"]
 offset_left = 611.0
@@ -61,6 +66,7 @@ offset_right = 644.0
 offset_bottom = -96.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackSide2"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label5" type="Label" parent="WarriorRed"]
 offset_left = 598.0
@@ -69,6 +75,7 @@ offset_right = 631.0
 offset_bottom = 106.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackDown1"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label6" type="Label" parent="WarriorRed"]
 offset_left = 612.0
@@ -77,6 +84,7 @@ offset_right = 645.0
 offset_bottom = 297.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackDown2"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label7" type="Label" parent="WarriorRed"]
 offset_left = 601.0
@@ -85,6 +93,7 @@ offset_right = 634.0
 offset_bottom = 482.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackUp1"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label8" type="Label" parent="WarriorRed"]
 offset_left = 609.0
@@ -93,7 +102,7 @@ offset_right = 642.0
 offset_bottom = 664.0
 scale = Vector2(2.5286, 2.5286)
 text = "attackUp2"
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_jr3bw")]
 position = Vector2(542, 228)
-speed = 5.0
