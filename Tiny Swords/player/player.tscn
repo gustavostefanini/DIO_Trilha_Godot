@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnbxf4g60n406"]
+[gd_scene load_steps=10 format=3 uid="uid://dnbxf4g60n406"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_5oab6"]
 [ext_resource type="Texture2D" uid="uid://trjpb7dgaxa2" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_380c1"]
@@ -73,10 +73,28 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_dgehg"]
+resource_name = "dashin"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(0, 7)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ntk73"]
 _data = {
 "RESET": SubResource("Animation_7eu4c"),
 "attack_side1": SubResource("Animation_777er"),
+"dashing": SubResource("Animation_dgehg"),
 "idle": SubResource("Animation_typfi"),
 "run": SubResource("Animation_0mk6q")
 }

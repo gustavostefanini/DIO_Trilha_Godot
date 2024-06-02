@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
-@export var speed: float = 5
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
 var is_running: bool = false
-
+var is_dashing: bool = false
+var dash_time: float = 0.0
+@export var dash_maximum_time: float = .2
+@export var dash_speed: float = 15
+@export var normal_speed: float = 5
+var speed = normal_speed
 
 func _physics_process(delta: float):
 	
@@ -18,7 +23,8 @@ func _physics_process(delta: float):
 	
 	#muda animação para correr e vice-versa
 	if input_vector != Vector2(0,0):
-		animation_player.play("run")
+		if not is_dashing:
+			animation_player.play("run")
 		is_running = true
 	else:
 		animation_player.play("idle")
@@ -31,4 +37,17 @@ func _physics_process(delta: float):
 		sprite.flip_h = true
 	
 	#implementa dashing com shift
-	
+	if is_running and Input.is_action_just_pressed("dash"):
+		is_dashing = true
+		speed = dash_speed
+		animation_player.play("dashing")
+	if is_dashing:
+		dash_time += delta
+		if dash_time >= dash_maximum_time:
+			is_dashing = false
+			speed = normal_speed
+			dash_time = 0.0
+			animation_player.play("idle")
+			
+		
+		
