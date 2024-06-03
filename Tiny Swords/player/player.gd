@@ -65,13 +65,17 @@ func _physics_process(delta: float):
 		is_attacking = true
 		speed = attack_speed
 		if input_vector.x !=  0:
-			attack_direction = "side"
-			
-			animation_player.play("attack_side_1")
+			attack_direction = "attack_side_1"
+		elif input_vector.y < 0:
+			attack_direction = "attack_up_1"
+		elif input_vector.y > 0:
+			attack_direction = "attack_down_1"
+		animation_player.play(attack_direction)
 	if is_attacking:
 		attack_time += delta
 		if attack_time >= attack_maximum_time:
 			is_attacking = false
 			speed = normal_speed
 			attack_time = 0.0
+			attack_direction = ""
 			animation_player.play("idle")
