@@ -7,19 +7,21 @@ extends CharacterBody2D
 var input_vector: Vector2
 var target_velocity: Vector2
 var normal_speed: float = 5
-var speed = normal_speed
+var speed: float = normal_speed
 
 #variáveis para animação de movimento básico
 var is_running: bool = false
 
 #variáveis para dash
 var is_dashing: bool = false
+var was_dashing: bool = false
 var dash_time: float = 0.0
 var dash_maximum_time: float = .2
 var dash_speed: float = 15
 
 #variáveis para ataques
 var is_attacking: bool = false
+var was_attacking: bool = false
 var attack_time: float = 0.0
 var attack_maximum_time: float = 0.6
 var attack_speed: float = 2
@@ -66,16 +68,16 @@ func _process(delta: float):
 	#configura os ataques
 	if Input.is_action_just_pressed("attack_1") and not is_dashing:
 		attack_type = "1"
-		attack(attack_type)
+		attack(attack_type,was_attacking)
 	if Input.is_action_just_pressed("attack_2") and not is_dashing:
 		attack_type = "2"
-		attack(attack_type)
+		attack(attack_type,was_attacking)
 
 func _physics_process(delta: float):
 	
 	#movimento geral
 	input_vector = Input.get_vector("move_left","move_right","move_up","move_down",.15)
-	target_velocity = input_vector * speed * 100
+	target_velocity = input_vector * speed * 100.0
 	velocity = lerp(velocity,target_velocity,.15)
 	move_and_slide()
 	
@@ -83,7 +85,7 @@ func _physics_process(delta: float):
 	if is_running and Input.is_action_just_pressed("dash"):
 		dash()
 
-func attack(attack_type: String):
+func attack(attack_type: String,was_attacking: bool):
 	if is_attacking:
 		return
 	is_attacking = true
