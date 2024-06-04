@@ -30,6 +30,9 @@ var attack_type: String = ""
 
 func _process(delta: float):
 	
+	#passa a posição do player para o manager
+	GameManager.player_position = position
+	
 	#configura cooldown dos ataques
 	if is_attacking:
 		attack_time += delta

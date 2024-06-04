@@ -9,4 +9,4 @@
 position = Vector2(559, 362)
 
 [node name="Pawn" parent="." instance=ExtResource("2_0kgg8")]
-position = Vector2(927, 239)
+position = Vector2(259, 342)
