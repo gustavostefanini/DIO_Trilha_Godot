@@ -3,35 +3,33 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
-#variáveis para movimento
+#variável para leitura do teclado
 var input_vector: Vector2
-var target_velocity: Vector2
-var normal_speed: float = 5
-var speed: float = normal_speed
 
-#variáveis para animação de movimento básico
+#velocidades
+@export var normal_speed: float = 5
+@export var attack_speed: float = 2
+@export var dash_speed: float = 15
+var speed = normal_speed
+
+#declarações de ação
 var is_running: bool = false
-
-#variáveis para dash
 var is_dashing: bool = false
-var was_dashing: bool = false
-var dash_time: float = 0.0
-var dash_maximum_time: float = .2
-var dash_speed: float = 15
-
-#variáveis para ataques
 var is_attacking: bool = false
-var was_attacking: bool = false
-var attack_time: float = 0.0
-var attack_maximum_time: float = 0.6
-var attack_speed: float = 2
-var attack_direction: String = ""
-var attack_type: String = ""
+
+#tempos de cooldown
+@export var dash_maximum_time: float = .2
+@export var attack_maximum_time: float = 0.6
+var attack_time: float = 0
+var dash_time: float = 0
 
 func _process(delta: float):
 	
 	#passa a posição do player para o manager
 	GameManager.player_position = position
+	
+	#lê teclas de ação e chama suas funções
+	read_input()
 	
 	#configura cooldown dos ataques
 	if is_attacking:
@@ -40,17 +38,15 @@ func _process(delta: float):
 			is_attacking = false
 			speed = normal_speed
 			attack_time = 0.0
-			attack_direction = ""
-			attack_type = ""
 			animation_player.play("idle")
 	
-	#configura cooldown do dash
+	#configura cooldown dos ataques
 	if is_dashing:
 		dash_time += delta
 		if dash_time >= dash_maximum_time:
 			is_dashing = false
 			speed = normal_speed
-			dash_time = 0.0
+			dash_time = 0
 			animation_player.play("idle")
 	
 	#configura animação para correr e respirar
@@ -67,32 +63,34 @@ func _process(delta: float):
 			sprite.flip_h = false
 		if input_vector.x < 0: 
 			sprite.flip_h = true
-	
-	#configura os ataques
-	if Input.is_action_just_pressed("attack_1") and not is_dashing:
-		attack_type = "1"
-		attack(attack_type,was_attacking)
-	if Input.is_action_just_pressed("attack_2") and not is_dashing:
-		attack_type = "2"
-		attack(attack_type,was_attacking)
 
-func _physics_process(delta: float):
+func read_input():
 	
-	#movimento geral
+	#movement
 	input_vector = Input.get_vector("move_left","move_right","move_up","move_down",.15)
-	target_velocity = input_vector * speed * 100.0
-	velocity = lerp(velocity,target_velocity,.15)
-	move_and_slide()
+	move()
 	
-	#configura o dash
+	#attack
+	if Input.is_action_just_pressed("attack_1") and not is_dashing:
+		attack("1")
+	if Input.is_action_just_pressed("attack_2") and not is_dashing:
+		attack("2")
+		
+	#dash
 	if is_running and Input.is_action_just_pressed("dash"):
 		dash()
 
-func attack(attack_type: String,was_attacking: bool):
+func move():
+	var target_velocity = input_vector * speed * 100.0
+	velocity = lerp(velocity,target_velocity,.15)
+	move_and_slide()
+
+func attack(attack_type: String):
 	if is_attacking:
 		return
 	is_attacking = true
 	speed = attack_speed
+	var attack_direction: String
 	if input_vector.x !=  0 or input_vector == Vector2(0,0):
 		attack_direction = "attack_side_"
 	elif input_vector.y < 0:
