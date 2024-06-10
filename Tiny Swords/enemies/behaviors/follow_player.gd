@@ -1,16 +1,23 @@
-extends CharacterBody2D
+extends Node
 
-var speed: float = 2
+@export var speed: float = 1
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+var enemy: Enemy
+var sprite: AnimatedSprite2D
+
+
+func _ready():
+	enemy = get_parent()
+	sprite = enemy.get_node("AnimatedSprite2D")
+
 func _process(delta):
 	
 	#movimenta seguindo a posição do player
 	var player_position = GameManager.player_position
-	var difference = player_position - position
+	var difference = player_position - enemy.position
 	var input_vector = difference.normalized()
-	velocity = input_vector * speed * 100
-	move_and_slide()
+	enemy.velocity = input_vector * speed * 100
+	enemy.move_and_slide()
 	
 	#inverte a animação conforme o movimento
 	if input_vector.x > 0:

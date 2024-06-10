@@ -3,14 +3,17 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
+#varíavel para dano
+@export var sword_damage: int = 2
+
 #variável para leitura do teclado
 var input_vector: Vector2
 
 #velocidades
-@export var normal_speed: float = 5
-@export var attack_speed: float = 2
-@export var dash_speed: float = 15
-var speed = normal_speed
+var normal_speed: float = 5
+var attack_speed: float = 2
+var dash_speed: float = 15
+@export var speed = normal_speed
 
 #declarações de ação
 var is_running: bool = false
@@ -18,8 +21,8 @@ var is_dashing: bool = false
 var is_attacking: bool = false
 
 #tempos de cooldown
-@export var dash_maximum_time: float = .2
-@export var attack_maximum_time: float = 0.6
+var dash_maximum_time: float = .2
+var attack_maximum_time: float = 0.6
 var attack_time: float = 0
 var dash_time: float = 0
 
@@ -105,3 +108,11 @@ func dash():
 	is_dashing = true
 	speed = dash_speed
 	animation_player.play("dashing")
+
+func dano_a_inimigos():
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		enemy.damage(sword_damage)
+	#filtrar inimigos para range da espada
+	#passar dano sword_damage como parametro para enemy.damage()
+	pass
