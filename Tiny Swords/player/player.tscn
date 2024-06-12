@@ -301,4 +301,4 @@ modulate = Color(0.737193, 0.737193, 0.737193, 1)
 show_behind_parent = true
 position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_bv2w4")
-debug_color = Color(0.713726, 0.6, 0.701961, 0.419608)
+debug_color = Color(0.950037, 0.307274, 1, 0)

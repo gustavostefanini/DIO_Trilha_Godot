@@ -2,6 +2,7 @@ extends CharacterBody2D
 	 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var sword_area: Area2D = $SwordArea
 
 #varíavel para dano
 @export var sword_damage: int = 2
@@ -110,9 +111,16 @@ func dash():
 	animation_player.play("dashing")
 
 func dano_a_inimigos():
-	var enemies = get_tree().get_nodes_in_group("enemies")
-	for enemy in enemies:
-		enemy.damage(sword_damage)
-	#filtrar inimigos para range da espada
-	#passar dano sword_damage como parametro para enemy.damage()
-	pass
+	var bodies = sword_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("enemies"):
+			var enemy: Enemy = body
+			var enemy_direction = (enemy.position - position).normalized()
+			var attack_direction: Vector2
+			if sprite.flip_h:
+				attack_direction = Vector2.LEFT
+			else:
+				attack_direction = Vector2.RIGHT
+			var dot_product = enemy_direction.dot(attack_direction)
+			if dot_product > .4 :
+				enemy.damage(sword_damage)
