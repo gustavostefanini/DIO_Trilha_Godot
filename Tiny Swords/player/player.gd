@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 #variável para leitura do teclado
 var input_vector: Vector2
+var attack_direction: String
 
 #velocidades
 var normal_speed: float = 5
@@ -94,7 +95,6 @@ func attack(attack_type: String):
 		return
 	is_attacking = true
 	speed = attack_speed
-	var attack_direction: String
 	if input_vector.x !=  0 or input_vector == Vector2(0,0):
 		attack_direction = "attack_side_"
 	elif input_vector.y < 0:
@@ -116,11 +116,17 @@ func dano_a_inimigos():
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
 			var enemy_direction = (enemy.position - position).normalized()
-			var attack_direction: Vector2
-			if sprite.flip_h:
-				attack_direction = Vector2.LEFT
-			else:
-				attack_direction = Vector2.RIGHT
-			var dot_product = enemy_direction.dot(attack_direction)
-			if dot_product > .4 :
+			var attack_vector: Vector2
+			var dot_hit
+			if attack_direction == "attack_side_":
+				if sprite.flip_h:
+					attack_vector = Vector2.LEFT
+				else:
+					attack_vector = Vector2.RIGHT
+			elif attack_direction == "attack_up_":
+				attack_vector = Vector2.UP
+			elif attack_direction == "attack_down_":
+				attack_vector = Vector2.DOWN
+			var dot_product = enemy_direction.dot(attack_vector)
+			if dot_product > .45 :
 				enemy.damage(sword_damage)
