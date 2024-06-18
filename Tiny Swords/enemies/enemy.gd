@@ -20,5 +20,6 @@ func die():
 	if death_prefab:
 		var death_object = death_prefab.instantiate()
 		death_object.position = position
+		death_object.scale = scale
 		get_parent().add_child(death_object)
 	queue_free()
