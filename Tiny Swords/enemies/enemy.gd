@@ -6,6 +6,13 @@ extends Node2D
 
 func damage(amount: int):
 	health -= amount
+	
+	modulate = Color.RED
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self,"modulate",Color.WHITE,0.3)
+	
 	if health <= 0:
 		die()
 
