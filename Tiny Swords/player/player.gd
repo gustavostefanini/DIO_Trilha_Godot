@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 	 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -7,6 +8,7 @@ extends CharacterBody2D
 
 #variáveis de hit points
 @export var hit_points: int = 100
+@export var max_hit_points: int = 100
 @export var death_prefab: PackedScene
 
 #varíavel para dano
@@ -179,3 +181,9 @@ func die():
 		death_object.scale = scale
 		get_parent().add_child(death_object)
 	queue_free()
+
+func regen(amount: int):
+	hit_points += amount
+	if hit_points > max_hit_points:
+		hit_points = max_hit_points
+	return hit_points
