@@ -9,4 +9,5 @@ func on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		var player: Player = body
 		player.regen(regen_amount)
-	queue_free()
+		print(player.hit_points)
+		queue_free()

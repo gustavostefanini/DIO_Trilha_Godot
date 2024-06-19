@@ -62,7 +62,9 @@ height = 56.0
 [node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_g58kn")
+health = 4
 death_prefab = ExtResource("2_0s1vj")
+damage_amount = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -30)

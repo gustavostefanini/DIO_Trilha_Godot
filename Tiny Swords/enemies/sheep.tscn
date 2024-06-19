@@ -64,6 +64,7 @@ motion_mode = 1
 script = ExtResource("1_51jvc")
 health = 1
 death_prefab = ExtResource("2_56k7a")
+damage_amount = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)

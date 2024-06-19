@@ -7,12 +7,13 @@ extends CharacterBody2D
 @onready var hit_area: Area2D = $HitArea
 
 #variáveis de hit points
-@export var hit_points: int = 100
-@export var max_hit_points: int = 100
+@export var hit_points: int
+@export var max_hit_points: int
 @export var death_prefab: PackedScene
 
 #varíavel para dano
-@export var sword_damage: int = 2
+@export var sword_damage: int
+var actual_damage: int
 
 #variável para leitura do teclado
 var input_vector: Vector2
@@ -34,7 +35,7 @@ var dash_maximum_time: float = .2
 var attack_maximum_time: float = 0.6
 var attack_time: float = 0
 var dash_time: float = 0
-var hit_area_cooldown: float = 0
+var hit_area_cooldown: float = 0.0
 
 func _process(delta: float):
 	
@@ -43,6 +44,9 @@ func _process(delta: float):
 	
 	#lê teclas de ação e chama suas funções
 	read_input()
+	
+	#processar dano
+	update_hit_area(delta)
 	
 	#configura cooldown dos ataques
 	if is_attacking:
@@ -77,8 +81,7 @@ func _process(delta: float):
 		if input_vector.x < 0: 
 			sprite.flip_h = true
 	
-	#processar dano
-	update_hit_area(delta)
+
 
 func read_input():
 	
@@ -106,13 +109,14 @@ func attack(attack_type: String):
 		return
 	is_attacking = true
 	speed = attack_speed
+	actual_damage = sword_damage * attack_type.to_int()
 	if input_vector.x !=  0 or input_vector == Vector2(0,0):
 		attack_direction = "attack_side_"
 	elif input_vector.y < 0:
 		attack_direction = "attack_up_"
 	elif input_vector.y > 0:
 		attack_direction = "attack_down_"
-	animation_player.play(attack_direction + attack_type)
+	animation_player.play(attack_direction + attack_type) 
 
 func dash():
 	if is_dashing:
@@ -139,7 +143,7 @@ func dano_a_inimigos():
 				attack_vector = Vector2.DOWN
 			var dot_product = enemy_direction.dot(attack_vector)
 			if dot_product > .45 :
-				enemy.damage(sword_damage)
+				enemy.damage(actual_damage)
 
 func update_hit_area(delta: float):
 	#temporizador
@@ -153,15 +157,15 @@ func update_hit_area(delta: float):
 	for body in bodies:
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
-			var damage_amount = 10
+			var damage_amount = enemy.damage_amount
 			damage(damage_amount)
 
 func damage(amount: int):
 	if hit_points <= 0:
 		return
 	
-	#processa o hit
 	hit_points -= amount
+	print("o player está com ",hit_points," de vida")
 	
 	#dica visual do hit
 	modulate = Color.YELLOW_GREEN
@@ -169,7 +173,6 @@ func damage(amount: int):
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(self,"modulate",Color.WHITE,0.3)
-	
 	#processa caso de morte
 	if hit_points <= 0:
 		die()
