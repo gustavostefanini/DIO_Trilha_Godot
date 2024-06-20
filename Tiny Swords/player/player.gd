@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var sword_area: Area2D = $SwordArea
 @onready var hit_area: Area2D = $HitArea
 @onready var hit_points_progress: ProgressBar = $HitPointsProgressBar
+@onready var damage_digit_prefab = preload("res://misc/damage_digit.tscn")
+@onready var damage_digit_marker = $Marker2D
 
 #variáveis de hit points
 @export var hit_points: int
@@ -15,6 +17,10 @@ extends CharacterBody2D
 #varíavel para dano
 @export var sword_damage: int
 var actual_damage: int
+@export var exp: int
+
+#geração de carne
+var meat_index: int = 0
 
 #variável para leitura do teclado
 var input_vector: Vector2
@@ -42,6 +48,7 @@ func _process(delta: float):
 	
 	#passa a posição do player para o manager
 	GameManager.player_position = position
+	GameManager.player_exp = exp
 	
 	#lê teclas de ação e chama suas funções
 	read_input()
@@ -86,6 +93,10 @@ func _process(delta: float):
 		if input_vector.x < 0: 
 			sprite.flip_h = true
 	
+	#gera carne
+	if meat_index >= 100:
+		create_meat()
+		meat_index -=100
 
 
 func read_input():
@@ -149,6 +160,9 @@ func dano_a_inimigos():
 			var dot_product = enemy_direction.dot(attack_vector)
 			if dot_product > .45 :
 				enemy.damage(actual_damage)
+			if enemy.is_dead:
+				exp += enemy.exp_amount
+				meat_index += enemy.exp_amount
 
 func update_hit_area(delta: float):
 	#temporizador
@@ -170,14 +184,23 @@ func damage(amount: int):
 		return
 	
 	hit_points -= amount
-	print("o player está com ",hit_points," de vida")
 	
 	#dica visual do hit
-	modulate = Color.YELLOW_GREEN
+	modulate = Color.DARK_RED
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(self,"modulate",Color.WHITE,0.3)
+	
+	#mostra dano
+	var damage_digit = damage_digit_prefab.instantiate()
+	damage_digit.value = amount
+	if damage_digit_marker:
+		damage_digit.global_position = $Marker2D.global_position
+	else: 
+		damage_digit.global_position = position
+	get_parent().add_child(damage_digit)
+	
 	#processa caso de morte
 	if hit_points <= 0:
 		die()
@@ -195,3 +218,9 @@ func regen(amount: int):
 	if hit_points > max_hit_points:
 		hit_points = max_hit_points
 	return hit_points
+
+func create_meat():
+	var meat_object = preload("res://resources/meat.tscn").instantiate()
+	get_parent().add_child(meat_object)
+	meat_object.global_position = Vector2(randi_range(0,1100),randi_range(10,700))
+	

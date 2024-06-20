@@ -71,6 +71,7 @@ autoplay = "default"
 frame = 6
 frame_progress = 1.0
 script = ExtResource("2_wvvcr")
+regen_amount = 20
 
 [node name="Area2D" type="Area2D" parent="."]
 

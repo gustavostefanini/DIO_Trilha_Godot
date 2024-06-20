@@ -6,7 +6,7 @@ extends Node2D
 
 var spawn_cooldown: float = 0
 var creature_selector: int
-
+var meat_index: int
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	#freq

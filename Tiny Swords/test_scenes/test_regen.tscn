@@ -1,14 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwjjc1jw6547e"]
+[gd_scene load_steps=2 format=3 uid="uid://dwjjc1jw6547e"]
 
 [ext_resource type="PackedScene" uid="uid://dnbxf4g60n406" path="res://player/player.tscn" id="1_g66kb"]
-[ext_resource type="PackedScene" uid="uid://c6al23om81su7" path="res://resources/meat.tscn" id="2_napwk"]
 
 [node name="TestRegen" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_g66kb")]
 position = Vector2(217, 211)
 hit_points = 15
-
-[node name="Meat" parent="." instance=ExtResource("2_napwk")]
-position = Vector2(616, 169)
-regen_amount = 30
