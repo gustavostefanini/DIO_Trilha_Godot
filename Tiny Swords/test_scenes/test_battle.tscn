@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dnbxf4g60n406" path="res://player/player.tscn" id="1_ebe6a"]
 [ext_resource type="PackedScene" uid="uid://cbeg4ky7t5iwp" path="res://manager/spawner.tscn" id="3_82hs1"]
-[ext_resource type="PackedScene" uid="uid://c6al23om81su7" path="res://misc/meat.tscn" id="5_tjk42"]
+[ext_resource type="PackedScene" uid="uid://c6al23om81su7" path="res://resources/meat.tscn" id="5_tjk42"]
 
 [node name="TestBattle" type="Node2D"]
 

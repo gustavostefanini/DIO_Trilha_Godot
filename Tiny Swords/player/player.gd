@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
 @onready var hit_area: Area2D = $HitArea
+@onready var hit_points_progress: ProgressBar = $HitPointsProgressBar
 
 #variáveis de hit points
 @export var hit_points: int
@@ -47,6 +48,10 @@ func _process(delta: float):
 	
 	#processar dano
 	update_hit_area(delta)
+	
+	#atualizar barra de vida
+	hit_points_progress.max_value = max_hit_points
+	hit_points_progress.value = hit_points
 	
 	#configura cooldown dos ataques
 	if is_attacking:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnbxf4g60n406"]
+[gd_scene load_steps=20 format=3 uid="uid://dnbxf4g60n406"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_5oab6"]
 [ext_resource type="Texture2D" uid="uid://trjpb7dgaxa2" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_380c1"]
@@ -276,6 +276,12 @@ radius = 100.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ooia"]
 radius = 38.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_682gd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8mrc"]
+bg_color = Color(0.84, 0.0336, 0.0470398, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_5oab6")
@@ -317,3 +323,16 @@ debug_color = Color(0.950037, 0.307274, 1, 0)
 position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_4ooia")
 debug_color = Color(0.918604, 0.247651, 0.363067, 0.42)
+
+[node name="HitPointsProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.5
+offset_top = 1.0
+offset_right = 40.5
+offset_bottom = 5.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_682gd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h8mrc")
+show_percentage = false
